@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-=^gr0+n30p@^=dw(+y4cnk=0c0mj13hohak8fm71xe&@jhivet
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+import os
+# Allow both localhost and Codespace public URL
+CODESPACE_NAME = os.environ.get('CODESPACE_NAME')
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+if CODESPACE_NAME:
+    ALLOWED_HOSTS.append(f'{CODESPACE_NAME}-8000.app.github.dev')
 
 
 # Application definition
@@ -85,11 +90,11 @@ DATABASES = {
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': 'localhost',
-            'port': 27017,
-            'username': '',
-            'password': '',
-            'authSource': 'admin',
-            'authMechanism': 'SCRAM-SHA-1',
+            # 'port': 27017,
+            # 'username': 'None',
+            # 'password': 'None',
+            # 'authSource': 'admin',
+            # 'authMechanism': 'SCRAM-SHA-1',
         }
     }
 }
